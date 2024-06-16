@@ -4,10 +4,15 @@ def main():
     words = count_words(text)
     chars = get_chars_dict(text)
     list_of_chars = [{'key': k, 'value':v} for k, v in chars.items()]
-    print(text)
-    print(f"{words} words found in the document")
     list_of_chars.sort(reverse=True, key=sort_on)
-    print(list_of_chars)
+    print(f"--- Begin report of {book_path} ---")
+    print(f"{words} words found in the document")
+    my_report = print_report(list_of_chars)
+    print("--- End report ---")
+def print_report(list):
+    for el in list:
+        if el['key'].isalpha():
+            print(f"The '{el['key']}' character was found {el['value']} times")
 def get_book_text(path):
     with open(path) as f:
         return f.read()
